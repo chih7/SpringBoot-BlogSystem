@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>博客系统</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+          crossorigin="anonymous"></link>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+            integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+            integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/css/blog.css" th:href="@{/css/blog.css}">
+    </link>
+</head>
+<body>
+<header th:replace="fragments/nav :: navbar"/>
+
+<!--/*--><!--解析时删除-->
+
+<!-- Fixed navbar -->
+<header data-th-fragment="navbar">
+    <script>
+        function logout() {
+            $("#logoutForm").submit()
+        }
+
+        $(document).ready(function () {
+            $(".blog-nav-item").each(function () {
+                var pathname = window.location.pathname;
+                var element = $(this);
+                var locations = eval(element.data("location"));
+                var indexOf = locations.indexOf(pathname);
+                if (indexOf >= 0) {
+                    element.addClass("active");
+                }
+            });
+
+        });
+    </script>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <a class="navbar-brand" href="#">
+                <img class="navbar-brand d-inline-block align-top"
+                     src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" width="30"
+                     height="30" alt=""/>
+            </a>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link blog-nav-item" data-location="['/','/index.html']"
+                       href="/index.html">首页</a>
+                    <a class="nav-item nav-link blog-nav-item" data-location="['/user/blogs.html']"
+                       sec:authorize="hasAnyRole('USER') and !hasAnyRole('ADMIN')"
+                       th:href="@{/user/blogs.html}">我的博客</a>
+                    <a class="nav-item nav-link blog-nav-item" data-location="[]"
+                       sec:authorize="hasAnyRole('USER') and !hasAnyRole('ADMIN')"
+                       th:href="@{/newBlog.html}">新建博客</a>
+                    <a class="nav-item nav-link blog-nav-item" data-location="[]"
+                       sec:authorize="hasAnyRole('USER') and !hasAnyRole('ADMIN')"
+                       th:href="@{/search.html.html}">搜索</a>
+                    <a class="nav-item nav-link blog-nav-item" data-location="[]"
+                       sec:authorize="hasAnyRole('ADMIN')"
+                       href="/manager/users.html">用户管理</a>
+                    <a class="nav-item nav-link blog-nav-item" data-location="[]"
+                       sec:authorize="hasAnyRole('ADMIN')"
+                       href="/manager/blogs.html">博客管理</a>
+                    <a class="nav-item nav-link blog-nav-item" data-location="[]"
+                       sec:authorize="hasAnyRole('ADMIN')"
+                       href="/manager/categories.html">分类管理</a>
+
+                </div>
+            </div>
+            <div class="collapse navbar-collapse justify-content-end" style="margin-right: 200px">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="/login.html" data-location="[]"
+                       sec:authorize="isAnonymous()">登录</a>
+                    <a class="nav-item nav-link" href="/register.html" data-location="[]"
+                       sec:authorize="isAnonymous()">注册</a>
+                    <a class="nav-item nav-link" href="/user" data-location="[]"
+                       sec:authorize="isAuthenticated()" sec:authentication="name"> 登录用户</a>
+                    <a class="nav-item nav-link" href="#" data-location="[]"
+                       sec:authorize="isAuthenticated()" onclick="logout()">注销</a>
+                    <form id="logoutForm" th:action="@{/logout}" method="post" hidden="hidden">
+                        <input type="submit" value="Sign Out"/>
+                    </form>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </nav>
+</header>
+
+<!--*/-->
+<!-- Begin page content -->
+<div class="container">
+    <div class="mt-3">
+        <h1>Sticky footer with fixed navbar</h1>
+    </div>
+    <h1 class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML
+        and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body &gt;
+            .container</code>.</h1>
+    <h1 class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML
+        and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body &gt;
+            .container</code>.</h1>
+    <h1 class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML
+        and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body &gt;
+            .container</code>.</h1>
+    <h1 class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML
+        and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body &gt;
+            .container</code>.</h1>
+    <h1 class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML
+        and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body &gt;
+            .container</code>.</h1>
+    <h1 class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML
+        and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body &gt;
+            .container</code>.</h1>
+    <h1 class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML
+        and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body &gt;
+            .container</code>.</h1>
+    <h1 class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML
+        and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body &gt;
+            .container</code>.</h1>
+    <h1 class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML
+        and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body &gt;
+            .container</code>.</h1>
+    <h1 class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML
+        and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body &gt;
+            .container</code>.</h1>
+    <h1 class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML
+        and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body &gt;
+            .container</code>.</h1>
+    <h1 class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML
+        and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body &gt;
+            .container</code>.</h1>
+    <h1 class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML
+        and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body &gt;
+            .container</code>.</h1>
+    <h1 class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML
+        and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body &gt;
+            .container</code>.</h1>
+    <h1 class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML
+        and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body &gt;
+            .container</code>.</h1>
+    <h1 class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML
+        and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body &gt;
+            .container</code>.</h1>
+    <p>Back to <a href="../sticky-footer">the default sticky footer</a> minus the navbar.</p>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <span class="text-muted">Place sticky footer content here.</span>
+    </div>
+</footer>
+
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-package com.mijack.SpringBootBlogSystem;
+package com.mijack.sbbs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

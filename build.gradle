@@ -1,13 +1,13 @@
 buildscript {
-	ext {
-		springBootVersion = '1.5.7.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+    ext {
+        springBootVersion = '1.5.7.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
 }
 
 apply plugin: 'java'
@@ -19,20 +19,32 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
-	mavenCentral()
+    mavenCentral()
+    maven {
+        url 'http://maven.aliyun.com/nexus/content/groups/public/'
+    }
 }
 
-
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-actuator')
-	compile('org.springframework.boot:spring-boot-actuator-docs')
-	compile('org.springframework.boot:spring-boot-starter-data-elasticsearch')
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
-	compile('org.springframework.boot:spring-boot-starter-data-redis')
-	compile('org.springframework.boot:spring-boot-starter-security')
-	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-	compile('org.springframework.boot:spring-boot-starter-web')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
-	testCompile('org.springframework.security:spring-security-test')
+    // 该依赖对于编译发行是必须的
+    compile('org.springframework.boot:spring-boot-starter-web')
+    // 添加 Thymeleaf 的依赖
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    // 添加  Spring Security 依赖
+    compile('org.springframework.boot:spring-boot-starter-security')
+    // 添加   Thymeleaf Spring Security 依赖，与 Thymeleaf 版本一致都是 3.x
+    compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4')
+    // 添加 Spring Boot 开发工具依赖
+    //compile("org.springframework.boot:spring-boot-devtools")
+    // 添加 Spring Data JPA 的依赖
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-data-mongodb')
+    compile('org.springframework.boot:spring-boot-starter-data-redis')
+    compile('org.springframework.boot:spring-boot-starter-data-elasticsearch')
+    // 添加 MySQL连接驱动 的依赖
+    compile('mysql:mysql-connector-java:6.0.5')
+    //actuator
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile('org.springframework.boot:spring-boot-actuator-docs')
+    compile 'com.google.guava:guava:23.0'
 }

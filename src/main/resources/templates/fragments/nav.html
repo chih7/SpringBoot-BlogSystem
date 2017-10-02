@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Title</title>
+</head>
+<body>
+
+<!-- Fixed navbar -->
+<header data-th-fragment="navbar">
+    <script>
+        function logout() {
+            $("#logoutForm").submit();
+        };
+
+        $(document).ready(function () {
+            $(".blog-nav-item").each(function () {
+                var pathname = window.location.pathname;
+                var element = $(this);
+                var locations = eval(element.data("location"));
+                var indexOf = locations.indexOf(pathname);
+                if (indexOf >= 0) {
+                    element.addClass("active");
+                }
+            });
+
+        });
+    </script>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <a class="navbar-brand" href="#">
+                <img class="navbar-brand d-inline-block align-top"
+                     src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" width="30"
+                     height="30" alt=""/>
+            </a>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link blog-nav-item" data-location="['/','/index.html']"
+                       href="/index.html">首页</a>
+                    <a class="nav-item nav-link blog-nav-item" data-location="['/user/blogs.html']"
+                       sec:authorize="hasAnyRole('USER') and !hasAnyRole('ADMIN')"
+                       th:href="@{/user/blogs.html}">我的博客</a>
+                    <a class="nav-item nav-link blog-nav-item" data-location="[]"
+                       sec:authorize="hasAnyRole('USER') and !hasAnyRole('ADMIN')"
+                       th:href="@{/newBlog.html}">新建博客</a>
+                    <a class="nav-item nav-link blog-nav-item" data-location="[]"
+                       sec:authorize="hasAnyRole('USER') and !hasAnyRole('ADMIN')"
+                       th:href="@{/search.html.html}">搜索</a>
+                    <a class="nav-item nav-link blog-nav-item" data-location="[]"
+                       sec:authorize="hasAnyRole('ADMIN')"
+                       href="/manager/users.html">用户管理</a>
+                    <a class="nav-item nav-link blog-nav-item" data-location="[]"
+                       sec:authorize="hasAnyRole('ADMIN')"
+                       href="/manager/blogs.html">博客管理</a>
+                    <a class="nav-item nav-link blog-nav-item" data-location="[]"
+                       sec:authorize="hasAnyRole('ADMIN')"
+                       href="/manager/categories.html">分类管理</a>
+
+                </div>
+            </div>
+            <div class="collapse navbar-collapse justify-content-end" style="margin-right: 200px">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="/login.html" data-location="[]"
+                       sec:authorize="isAnonymous()">登录</a>
+                    <a class="nav-item nav-link" href="/register.html" data-location="[]"
+                       sec:authorize="isAnonymous()">注册</a>
+                    <a class="nav-item nav-link" href="/user" data-location="[]"
+                       sec:authorize="isAuthenticated()" sec:authentication="name"> 登录用户</a>
+                    <a class="nav-item nav-link" href="#" data-location="[]"
+                       sec:authorize="isAuthenticated()" onclick="logout()">注销</a>
+                    <form id="logoutForm" th:action="@{/logout}" method="post" hidden="hidden">
+                        <input type="submit" value="Sign Out"/>
+                    </form>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </nav>
+</header>
+
+</body>
+</html>
