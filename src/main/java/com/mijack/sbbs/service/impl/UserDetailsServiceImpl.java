@@ -1,4 +1,4 @@
-package com.mijack.sbbs.service;
+package com.mijack.sbbs.service.impl;
 
 import com.mijack.sbbs.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
