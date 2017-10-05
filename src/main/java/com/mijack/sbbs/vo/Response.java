@@ -1,17 +1,26 @@
 package com.mijack.sbbs.vo;
 
-public class Response<T> {
-    private int code;
-    private String msg;
-    private T data;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Response<T> extends HashMap<String, Object> {
+    public Response<T> put(String key, Object value) {
+        super.put(key, value);
+        return this;
+    }
 
     public Response<T> data(T data) {
-        this.data = data;
+        put("data", data);
+        return this;
+    }
+
+    public Response<T> code(int code) {
+        put("code", code);
         return this;
     }
 
     public Response<T> msg(String msg) {
-        this.msg = msg;
+        put("msg", msg);
         return this;
     }
 

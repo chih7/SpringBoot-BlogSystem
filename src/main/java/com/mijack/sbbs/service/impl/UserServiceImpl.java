@@ -15,14 +15,12 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
 
     @Override
-    public User login(String email, String password) {
-        User user = userRepository.findByEmail(email);
+    public User login(String username, String email, String password) {
+        User user = userRepository.findByUsernameOrEmail(username, email);
         if (user == null) {
-            throw new UserNotFoundException(String.format("邮箱为%s的用户不存在", email));
+            return null;
         }
-        if (!Utils.isEquals(password, user.getPassword())) {
-            throw new IllegalPasswordException();
-        }
-        return user;
+        return Utils.isEquals(password, user.getPassword()) ?
+                user : null;
     }
 }
