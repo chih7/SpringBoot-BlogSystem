@@ -3,6 +3,7 @@ package com.mijack.sbbs.model;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import java.util.Date;
 
@@ -10,11 +11,11 @@ import java.util.Date;
 public class Token {
     @Id
     private long id;
-    @Null
+    @NotNull
     @OneToOne()
     @JoinColumn(name = "user_id", unique = true, nullable = false, updatable = false)
     private User user;
-    @Null
+    @NotNull
     private String token;
     @Column(name = "update_time", nullable = false)
     @UpdateTimestamp

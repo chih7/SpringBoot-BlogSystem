@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TokenRepository extends PagingAndSortingRepository<Token,Long>{
-User findByUser(User user);
+Token findByUser(User user);
 
-    User findByToken(String token);
+    Token findByToken(String token);
 }

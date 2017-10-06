@@ -1,5 +1,6 @@
 package com.mijack.sbbs.utils;
 
+import java.util.Base64;
 import java.util.regex.Pattern;
 
 public class Utils {
@@ -10,10 +11,18 @@ public class Utils {
     }
 
     public static boolean isEmpty(CharSequence charSequence) {
-        return charSequence != null && charSequence.length() > 0;
+        return charSequence == null || charSequence.length() == 0;
     }
 
     public static boolean isEmail(String email) {
-        return PATTERN.matcher(email).matches();
+        return !isEmpty(email) && PATTERN.matcher(email).matches();
+    }
+
+    public static String base64Encode(String src) {
+        return new String(Base64.getEncoder().encode(src.getBytes()));
+    }
+
+    public static String base64Decoder(String src) {
+        return new String(Base64.getDecoder().decode(src.getBytes()));
     }
 }

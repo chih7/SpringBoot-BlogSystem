@@ -1,5 +1,6 @@
 package com.mijack.sbbs.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,7 +28,7 @@ public class User implements UserDetails {
     @Pattern(regexp = "^[a-zA-z0-9]+@[a-zA-z0-9]+(\\.[a-zA-z0-9]+)+$")
     private String email;
     @NotNull
-    private String avatar="http://localhost:8080/favicon.ico";
+    private String avatar = "http://localhost:8080/favicon.ico";
 
     private int hotValue = 0;
     @Column(name = "update_time", nullable = false)
@@ -149,21 +150,25 @@ public class User implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
         return true;
     }
@@ -172,6 +177,7 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
@@ -181,6 +187,7 @@ public class User implements UserDetails {
         return roles;
     }
 
+    @JsonIgnore
     public String getAuthoritiesString() {
         StringBuilder sb = new StringBuilder();
 //        sb.append("[");
