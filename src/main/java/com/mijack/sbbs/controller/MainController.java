@@ -1,5 +1,6 @@
 package com.mijack.sbbs.controller;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -10,9 +11,14 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping({"/login.html"})
-    public String login() {
-        return "login";
+    /**
+     * 登录用户界面
+     *
+     * @return
+     */
+    @GetMapping({"login.html"})
+    public String loginPage(Authentication authentication) {
+        return (authentication != null && authentication.isAuthenticated()) ? "redirect:/" : "login";
     }
 
     @GetMapping({"/register.html"})

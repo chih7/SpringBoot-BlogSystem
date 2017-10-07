@@ -10,6 +10,7 @@ import java.util.Date;
 @Entity
 public class Token {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotNull
     @OneToOne()
