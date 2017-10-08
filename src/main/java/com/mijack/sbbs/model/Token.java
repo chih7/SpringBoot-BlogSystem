@@ -11,7 +11,7 @@ import java.util.Date;
 public class Token {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @NotNull
     @OneToOne()
     @JoinColumn(name = "user_id", unique = true, nullable = false, updatable = false)
@@ -22,11 +22,25 @@ public class Token {
     @UpdateTimestamp
     private Date updateTime;
 
-    public long getId() {
+    public Token() {
+    }
+
+    public Token(User user, String token) {
+        this.user = user;
+        this.token = token;
+    }
+
+    public Token(User user, String token, Date updateTime) {
+        this.user = user;
+        this.token = token;
+        this.updateTime = updateTime;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -33,6 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin()
                 .loginPage("/login")
                 .permitAll()
+                .failureForwardUrl("/login.html?error")
                 .successHandler(loginAuthenticationSuccessHandler)
                 .authenticationDetailsSource(request -> {
                     Map<String, String> map = new HashMap<>();
