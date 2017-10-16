@@ -1,6 +1,7 @@
 package com.mijack.sbbs.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Category {
@@ -40,12 +41,18 @@ public class Category {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Category category = (Category) o;
 
-        if (id != category.id) return false;
+        if (!Objects.equals(id, category.id)) {
+            return false;
+        }
         return name != null ? name.equals(category.name) : category.name == null;
     }
 

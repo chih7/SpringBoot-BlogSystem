@@ -144,18 +144,36 @@ public class Blog {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Blog blog = (Blog) o;
 
-        if (draft != blog.draft) return false;
-        if (id != null ? !id.equals(blog.id) : blog.id != null) return false;
-        if (title != null ? !title.equals(blog.title) : blog.title != null) return false;
-        if (category != null ? !category.equals(blog.category) : blog.category != null) return false;
-        if (contentUrl != null ? !contentUrl.equals(blog.contentUrl) : blog.contentUrl != null) return false;
-        if (createTime != null ? !createTime.equals(blog.createTime) : blog.createTime != null) return false;
-        if (updateTime != null ? !updateTime.equals(blog.updateTime) : blog.updateTime != null) return false;
+        if (draft != blog.draft) {
+            return false;
+        }
+        if (id != null ? !id.equals(blog.id) : blog.id != null) {
+            return false;
+        }
+        if (title != null ? !title.equals(blog.title) : blog.title != null) {
+            return false;
+        }
+        if (category != null ? !category.equals(blog.category) : blog.category != null) {
+            return false;
+        }
+        if (contentUrl != null ? !contentUrl.equals(blog.contentUrl) : blog.contentUrl != null) {
+            return false;
+        }
+        if (createTime != null ? !createTime.equals(blog.createTime) : blog.createTime != null) {
+            return false;
+        }
+        if (updateTime != null ? !updateTime.equals(blog.updateTime) : blog.updateTime != null) {
+            return false;
+        }
         return user != null ? user.equals(blog.user) : blog.user == null;
     }
 

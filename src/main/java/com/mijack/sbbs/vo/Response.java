@@ -1,9 +1,9 @@
 package com.mijack.sbbs.vo;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class Response<T> extends HashMap<String, Object> {
+    @Override
     public Response<T> put(String key, Object value) {
         super.put(key, value);
         return this;

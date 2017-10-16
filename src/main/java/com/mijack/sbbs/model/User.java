@@ -71,6 +71,7 @@ public class User implements UserDetails {
         this.id = id;
     }
 
+    @Override
     public String getUsername() {
         return username;
     }
@@ -79,6 +80,7 @@ public class User implements UserDetails {
         this.username = username;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
@@ -113,16 +115,30 @@ public class User implements UserDetails {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         User user = (User) o;
 
-        if (id != null ? !id.equals(user.id) : user.id != null) return false;
-        if (username != null ? !username.equals(user.username) : user.username != null) return false;
-        if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        if (email != null ? !email.equals(user.email) : user.email != null) return false;
-        if (avatar != null ? !avatar.equals(user.avatar) : user.avatar != null) return false;
+        if (id != null ? !id.equals(user.id) : user.id != null) {
+            return false;
+        }
+        if (username != null ? !username.equals(user.username) : user.username != null) {
+            return false;
+        }
+        if (password != null ? !password.equals(user.password) : user.password != null) {
+            return false;
+        }
+        if (email != null ? !email.equals(user.email) : user.email != null) {
+            return false;
+        }
+        if (avatar != null ? !avatar.equals(user.avatar) : user.avatar != null) {
+            return false;
+        }
         return roles != null ? roles.equals(user.roles) : user.roles == null;
     }
 
